@@ -1,0 +1,33 @@
+void dfs(int A[SIZE][SIZE],int i,int j,int N,int &count,int M)
+{
+    int R[]={-1,1,0,0,-1,-1,1,1};
+    int C[]={0,0,-1,1,-1,1,-1,1};
+    if(i>=0 and i<N and j>=0 and j<M and A[i][j]==1)
+    {
+        A[i][j]=0;
+        count++;
+        for(int p=0;p<8;p++)
+        {
+            dfs(A,i+R[p],j+C[p],N,count,M);
+        }
+    }
+}
+int findMaxArea(int N, int M, int A[SIZE][SIZE] )
+{  int count,max=0;
+    for(int i=0;i<N;i++)
+    {
+        for(int j=0;j<M;j++)
+        {
+            if(A[i][j]==1)
+            {
+                count=0;
+                dfs(A,i,j,N,count,M);
+                if(max<count)
+                max=count;
+            }
+        }
+    }
+    
+    return max;
+    
+    
